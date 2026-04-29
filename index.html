@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>战略报告资料准备工具</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Microsoft YaHei", Arial, sans-serif;
+      background: #f6f8fb;
+      color: #111827;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 36px 24px 60px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 34px;
+      color: #111827;
+    }
+
+    .subtitle {
+      margin-bottom: 32px;
+      font-size: 16px;
+      color: #6b7280;
+      line-height: 1.7;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 26px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .step-title {
+      margin: 0 0 20px;
+      font-size: 28px;
+      color: #111827;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 24px;
+      color: #111827;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #374151;
+    }
+
+    input {
+      width: 100%;
+      height: 52px;
+      padding: 0 16px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      font-size: 17px;
+      outline: none;
+      background: #fff;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 13px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #ffffff;
+      background: #2563eb;
+      transition: 0.15s ease;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .form-action-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .reset-button {
+      background: #6b7280;
+    }
+
+    .reset-button:hover {
+      background: #4b5563;
+    }
+
+    .dark-button {
+      background: #111827;
+      padding: 18px 34px;
+      font-size: 20px;
+      border-radius: 16px;
+    }
+
+    .dark-button:hover {
+      background: #030712;
+    }
+
+    .hint {
+      margin-top: 14px;
+      font-size: 14px;
+      color: #6b7280;
+      line-height: 1.7;
+    }
+
+    .simple-guide {
+      margin: 0 0 18px;
+      font-size: 15px;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+
+    .ai-link-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .ai-link {
+      display: block;
+      padding: 18px 20px;
+      border-radius: 14px;
+      background: #f3f4f6;
+      color: #111827;
+      text-decoration: none;
+      font-size: 17px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+
+    .ai-link:hover {
+      background: #e5e7eb;
+      color: #2563eb;
+    }
+
+    .dimension-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 26px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .dimension-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      flex: 0 0 auto;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #2563eb;
+      font-size: 14px;
+    }
+
+    .desc {
+      margin: 0 0 18px;
+      font-size: 15px;
+      color: #6b7280;
+      line-height: 1.7;
+    }
+
+    .mini-step {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .mini-step-title {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #111827;
+    }
+
+    .links {
+      margin: 12px 0 10px;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .links a {
+      display: inline-block;
+      margin-right: 12px;
+      margin-bottom: 8px;
+      color: #2563eb;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: #eff6ff;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      resize: vertical;
+      font-size: 15px;
+      line-height: 1.7;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .draft-textarea {
+      min-height: 260px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .message {
+      margin-top: 10px;
+      color: #2563eb;
+      font-size: 14px;
+      display: none;
+    }
+
+    .final-card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 26px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .final-action {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-link-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .dimension-header {
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .step-title {
+        font-size: 24px;
+      }
+
+      .section-title {
+        font-size: 22px;
+      }
+
+      .dark-button {
+        width: 100%;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>战略报告资料准备工具</h1>
+
+    <div class="subtitle">
+      输入研究主体、银行所在地区和研究时间后，依次完成宏观、行业、区域、监管四个维度。每个维度先找 URL，再复制提示词给 AI，最后把 AI 生成的初稿粘回页面。新版提示词会要求 AI 逐条打开 URL、通读全文；任意 URL 无法读取时会终止生成并提示更换。四个维度都完成后，一键复制四维初稿并生成最终稿。生成内容会默认避开任何咨询公司名称。
+    </div>
+
+    <div class="card">
+      <h2 class="step-title">快速打开 AI 工具</h2>
+
+      <div class="ai-link-grid">
+        <a class="ai-link" href="https://chatgpt.com/" target="_blank">ChatGPT</a>
+        <a class="ai-link" href="https://chat.deepseek.com/" target="_blank">DeepSeek</a>
+        <a class="ai-link" href="https://claude.ai/" target="_blank">Claude</a>
+        <a class="ai-link" href="https://gemini.google.com/" target="_blank">Gemini</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="step-title">Step 1：填写基础信息</h2>
+
+      <p class="simple-guide">
+        填写研究主体、银行所在地区和研究时间。示例：研究主体填“浦发银行”，银行所在地区填“上海”，研究时间填“2026”。
+      </p>
+
+      <div class="form-grid">
+        <div>
+          <label for="targetEntity">研究主体</label>
+          <input id="targetEntity" type="text" placeholder="例如：浦发银行" />
+        </div>
+
+        <div>
+          <label for="bankRegion">银行所在地区</label>
+          <input id="bankRegion" type="text" placeholder="例如：上海 / 广东省深圳市" />
+        </div>
+
+        <div>
+          <label for="researchYear">研究时间</label>
+          <input id="researchYear" type="text" placeholder="例如：2026" />
+        </div>
+      </div>
+
+      <div class="form-action-row">
+        <button onclick="generateSearchLinks()">生成四维搜索入口</button>
+        <button class="reset-button" onclick="clearAllData()">刷新 / 清空所有信息</button>
+      </div>
+
+      <div class="hint">
+        建议优先选择政府官网、央行/金监总官网、统计局、券商研报、权威媒体、上市银行年报等来源。这里只需要粘贴 URL，不需要粘贴文章原文。
+      </div>
+    </div>
+
+    <div class="dimension-card" id="macroSection">
+      <div class="dimension-header">
+        <div>
+          <h2 class="section-title">维度一：宏观资料</h2>
+          <p class="desc">
+            关注宏观经济、金融周期、利率环境、消费投资、财政货币政策、商业银行外部环境等内容。
+          </p>
+        </div>
+        <div class="tag">先做宏观</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 1：打开搜索链接</h3>
+        <p class="simple-guide">
+          点击下面任意一个搜索入口，打开后找 3-5 篇和宏观环境相关的文章。
+        </p>
+        <div id="macroLinks" class="links">请先在上方填写基础信息，并点击“生成四维搜索入口”。</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 2：粘贴宏观资料 URL</h3>
+        <p class="simple-guide">
+          把找到的文章链接粘贴到下面，一行放一个 URL。
+        </p>
+        <textarea id="macroUrls" placeholder="请粘贴宏观相关文章 URL，一行一个 URL"></textarea>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 3：复制宏观 URL + 提示词给 AI</h3>
+        <p class="simple-guide">
+          点下面按钮，把复制出来的内容粘贴到 AI 工具里发送。
+        </p>
+        <div class="button-row">
+          <button onclick="copyDimensionPrompt('macro')">复制宏观 URL + 提示词</button>
+        </div>
+        <div id="macroMessage" class="message">已复制宏观 URL + 提示词</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 4：粘贴宏观初稿</h3>
+        <p class="simple-guide">
+          AI 生成宏观篇后，把完整结果粘贴到下面。
+        </p>
+        <textarea id="macroDraft" class="draft-textarea" placeholder="请把 AI 生成的宏观篇初稿粘贴到这里"></textarea>
+      </div>
+    </div>
+
+    <div class="dimension-card" id="industrySection">
+      <div class="dimension-header">
+        <div>
+          <h2 class="section-title">维度二：行业资料</h2>
+          <p class="desc">
+            关注银行业趋势、息差、资产质量、零售转型、财富管理、数字化转型、风险管理等内容。
+          </p>
+        </div>
+        <div class="tag">再做行业</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 1：打开搜索链接</h3>
+        <p class="simple-guide">
+          点击下面任意一个搜索入口，打开后找 3-5 篇和银行业发展趋势相关的文章。
+        </p>
+        <div id="industryLinks" class="links">请先在上方填写基础信息，并点击“生成四维搜索入口”。</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 2：粘贴行业资料 URL</h3>
+        <p class="simple-guide">
+          把找到的文章链接粘贴到下面，一行放一个 URL。
+        </p>
+        <textarea id="industryUrls" placeholder="请粘贴行业相关文章 URL，一行一个 URL"></textarea>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 3：复制行业 URL + 提示词给 AI</h3>
+        <p class="simple-guide">
+          点下面按钮，把复制出来的内容粘贴到 AI 工具里发送。
+        </p>
+        <div class="button-row">
+          <button onclick="copyDimensionPrompt('industry')">复制行业 URL + 提示词</button>
+        </div>
+        <div id="industryMessage" class="message">已复制行业 URL + 提示词</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 4：粘贴行业初稿</h3>
+        <p class="simple-guide">
+          AI 生成行业篇后，把完整结果粘贴到下面。
+        </p>
+        <textarea id="industryDraft" class="draft-textarea" placeholder="请把 AI 生成的行业篇初稿粘贴到这里"></textarea>
+      </div>
+    </div>
+
+    <div class="dimension-card" id="regionalSection">
+      <div class="dimension-header">
+        <div>
+          <h2 class="section-title">维度三：区域资料</h2>
+          <p class="desc">
+            关注研究主体所在地区的经济规划、产业结构、重点项目、区域战略、政府工作报告、地方发展规划等内容。
+          </p>
+        </div>
+        <div class="tag">再做区域</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 1：打开搜索链接</h3>
+        <p class="simple-guide">
+          点击下面任意一个搜索入口，打开后找 3-5 篇和地方区域经济、政府规划相关的文章。
+        </p>
+        <div id="regionalLinks" class="links">请先在上方填写基础信息，并点击“生成四维搜索入口”。</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 2：粘贴区域资料 URL</h3>
+        <p class="simple-guide">
+          把找到的文章链接粘贴到下面，一行放一个 URL。
+        </p>
+        <textarea id="regionalUrls" placeholder="请粘贴区域相关文章 URL，一行一个 URL"></textarea>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 3：复制区域 URL + 提示词给 AI</h3>
+        <p class="simple-guide">
+          点下面按钮，把复制出来的内容粘贴到 AI 工具里发送。
+        </p>
+        <div class="button-row">
+          <button onclick="copyDimensionPrompt('regional')">复制区域 URL + 提示词</button>
+        </div>
+        <div id="regionalMessage" class="message">已复制区域 URL + 提示词</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 4：粘贴区域初稿</h3>
+        <p class="simple-guide">
+          AI 生成区域篇后，把完整结果粘贴到下面。
+        </p>
+        <textarea id="regionalDraft" class="draft-textarea" placeholder="请把 AI 生成的区域篇初稿粘贴到这里"></textarea>
+      </div>
+    </div>
+
+    <div class="dimension-card" id="regulatorySection">
+      <div class="dimension-header">
+        <div>
+          <h2 class="section-title">维度四：监管资料</h2>
+          <p class="desc">
+            关注金融监管、资本约束、风险防控、普惠金融、绿色金融、科技金融、国家金融监督管理总局、中国人民银行、商业银行监管政策等内容。
+          </p>
+        </div>
+        <div class="tag">最后做监管</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 1：打开搜索链接</h3>
+        <p class="simple-guide">
+          点击下面任意一个搜索入口，打开后找 3-5 篇和金融监管、银行监管政策相关的文章。
+        </p>
+        <div id="regulatoryLinks" class="links">请先在上方填写基础信息，并点击“生成四维搜索入口”。</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 2：粘贴监管资料 URL</h3>
+        <p class="simple-guide">
+          把找到的文章链接粘贴到下面，一行放一个 URL。
+        </p>
+        <textarea id="regulatoryUrls" placeholder="请粘贴监管相关文章 URL，一行一个 URL"></textarea>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 3：复制监管 URL + 提示词给 AI</h3>
+        <p class="simple-guide">
+          点下面按钮，把复制出来的内容粘贴到 AI 工具里发送。
+        </p>
+        <div class="button-row">
+          <button onclick="copyDimensionPrompt('regulatory')">复制监管 URL + 提示词</button>
+        </div>
+        <div id="regulatoryMessage" class="message">已复制监管 URL + 提示词</div>
+      </div>
+
+      <div class="mini-step">
+        <h3 class="mini-step-title">Step 4：粘贴监管初稿</h3>
+        <p class="simple-guide">
+          AI 生成监管篇后，把完整结果粘贴到下面。
+        </p>
+        <textarea id="regulatoryDraft" class="draft-textarea" placeholder="请把 AI 生成的监管篇初稿粘贴到这里"></textarea>
+      </div>
+    </div>
+
+    <div class="final-card">
+      <h2 class="step-title">最后一步：生成最终稿</h2>
+
+      <p class="simple-guide">
+        四个维度的初稿都粘贴完成后，点击下面按钮。复制出来的内容会自动包含宏观、行业、区域、监管四篇初稿和最终润色提示词。把它粘贴给 AI，即可生成完整最终稿。
+      </p>
+
+      <div class="final-action">
+        <button class="dark-button" onclick="copyFinalPrompt()">
+          一键复制四维初稿 + 最终润色提示词，生成最终稿
+        </button>
+      </div>
+
+      <div id="finalMessage" class="message">已复制四维初稿 + 最终润色提示词</div>
+    </div>
+  </div>
+
+  <script>
+    const urlTextareaIdMap = {
+      macro: "macroUrls",
+      industry: "industryUrls",
+      regional: "regionalUrls",
+      regulatory: "regulatoryUrls"
+    };
+
+    const draftTextareaIdMap = {
+      macro: "macroDraft",
+      industry: "industryDraft",
+      regional: "regionalDraft",
+      regulatory: "regulatoryDraft"
+    };
+
+    const dimensionNameMap = {
+      macro: "宏观",
+      industry: "行业",
+      regional: "区域",
+      regulatory: "监管"
+    };
+
+    let searchQueries = {
+      macro: "",
+      industry: "",
+      regional: "",
+      regulatory: ""
+    };
+
+    function generateSearchLinks() {
+      const baseInfo = getBaseInfo();
+      if (!baseInfo) return;
+
+      const targetEntity = baseInfo.targetEntity;
+      const bankRegion = baseInfo.bankRegion;
+      const researchYear = baseInfo.researchYear;
+
+      searchQueries = {
+        macro: `${researchYear} 中国 宏观经济 金融形势 商业银行 外部环境 发展趋势`,
+        industry: `${researchYear} 银行业 发展趋势 商业银行 净息差 资产质量 数字化转型 风险管理`,
+        regional: `${researchYear} ${targetEntity} ${bankRegion} 区域经济 地方产业 政府工作报告 发展规划`,
+        regulatory: `${researchYear} ${targetEntity} ${bankRegion} 银行业 监管政策 金融监管 国家金融监督管理总局 中国人民银行 商业银行`
+      };
+
+      setSearchBlock("macro", searchQueries.macro);
+      setSearchBlock("industry", searchQueries.industry);
+      setSearchBlock("regional", searchQueries.regional);
+      setSearchBlock("regulatory", searchQueries.regulatory);
+
+      alert("四个维度的搜索入口已生成。请从宏观维度开始做。");
+    }
+
+    function setSearchBlock(type, query) {
+      const encodedQuery = encodeURIComponent(query);
+
+      const baiduUrl = `https://www.baidu.com/s?wd=${encodedQuery}`;
+      const bingUrl = `https://www.bing.com/search?q=${encodedQuery}`;
+      const googleUrl = `https://www.google.com/search?q=${encodedQuery}`;
+
+      document.getElementById(`${type}Links`).innerHTML = `
+        <a href="${baiduUrl}" target="_blank">百度搜索</a>
+        <a href="${bingUrl}" target="_blank">Bing 搜索</a>
+        <a href="${googleUrl}" target="_blank">Google 搜索</a>
+      `;
+    }
+
+    function getBaseInfo() {
+      const targetEntity = document.getElementById("targetEntity").value.trim();
+      const bankRegion = document.getElementById("bankRegion").value.trim();
+      const researchYear = document.getElementById("researchYear").value.trim();
+
+      if (!targetEntity || !bankRegion || !researchYear) {
+        alert("请先填写研究主体、银行所在地区和研究时间");
+        return null;
+      }
+
+      return { targetEntity, bankRegion, researchYear };
+    }
+
+    function getUrls(type) {
+      const value = document.getElementById(urlTextareaIdMap[type]).value.trim();
+
+      if (!value) {
+        return "";
+      }
+
+      const urls = value
+        .split(/\n+/)
+        .map(item => item.trim())
+        .filter(Boolean);
+
+      return urls.map((url, index) => `${index + 1}. ${url}`).join("\n");
+    }
+
+    function getDraft(type) {
+      return document.getElementById(draftTextareaIdMap[type]).value.trim();
+    }
+
+    function copyDimensionPrompt(type) {
+      const baseInfo = getBaseInfo();
+      if (!baseInfo) return;
+
+      const urls = getUrls(type);
+
+      if (!urls) {
+        alert(`请先粘贴${dimensionNameMap[type]}资料 URL`);
+        return;
+      }
+
+      const prompt = buildPrompt(type, baseInfo.targetEntity, baseInfo.researchYear, urls, baseInfo.bankRegion);
+
+      navigator.clipboard.writeText(prompt).then(() => {
+        showMessage(`${type}Message`);
+      }).catch(() => {
+        fallbackCopy(prompt);
+        showMessage(`${type}Message`);
+      });
+    }
+
+    function showMessage(id) {
+      const msg = document.getElementById(id);
+      msg.style.display = "block";
+      setTimeout(() => {
+        msg.style.display = "none";
+      }, 1800);
+    }
+
+    function fallbackCopy(text) {
+      const temp = document.createElement("textarea");
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand("copy");
+      document.body.removeChild(temp);
+    }
+
+    function clearAllData() {
+      const inputAndTextareaIds = [
+        "targetEntity",
+        "bankRegion",
+        "researchYear",
+        "macroUrls",
+        "industryUrls",
+        "regionalUrls",
+        "regulatoryUrls",
+        "macroDraft",
+        "industryDraft",
+        "regionalDraft",
+        "regulatoryDraft"
+      ];
+
+      inputAndTextareaIds.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) element.value = "";
+      });
+
+      ["macro", "industry", "regional", "regulatory"].forEach(type => {
+        const linksBlock = document.getElementById(`${type}Links`);
+        if (linksBlock) {
+          linksBlock.innerHTML = "请先在上方填写基础信息，并点击“生成四维搜索入口”。";
+        }
+        searchQueries[type] = "";
+      });
+
+      document.querySelectorAll(".message").forEach(msg => {
+        msg.style.display = "none";
+      });
+
+      alert("已清空所有信息，可以重新填写。");
+    }
+
+    function buildPrompt(type, targetEntity, researchYear, urls, bankRegion) {
+      if (type === "macro") {
+        return `AI宏观分析提示词：
+
+# 角色设定
+你是国内头部金融机构的首席宏观战略研究员。你拥有极强的政策敏锐度和宏观经济提炼能力，擅长使用国家智库、顶尖券商、官方政策文件的专业语境，撰写金融机构的“中长期发展战略规划”。
+
+# 分析目标
+【${targetEntity}】：撰写主体战略规划中的《第一节：研判宏观形势变化，把握周期演进趋势》篇章。
+
+# 研究时间
+${researchYear}
+
+# 输入资料 URL
+请逐条打开并阅读以下 URL 的完整正文内容，提取其中与宏观经济、金融周期、利率环境、消费投资、财政货币政策、商业银行外部环境相关的信息。
+
+<宏观资料URL>
+${urls}
+</宏观资料URL>
+
+# URL 读取与校验规则
+
+## 1. 必须逐条打开 URL
+你必须按顺序逐条打开上述 URL，并完整阅读网页正文内容。严禁只依据网页标题、搜索结果摘要、网页片段、目录、AI 自动摘要或未打开页面的外部信息进行写作。
+
+## 2. 必须完成全文通读后再写作
+只有在确认所有 URL 均可访问，并且已经阅读完整正文后，才可以进入分析和正文撰写阶段。
+你需要基于 URL 正文中的真实内容进行归纳，不得脱离资料自行补充未经资料支持的信息。
+
+## 3. 任意 URL 无法访问时必须终止
+如果上述 URL 中有任意一条出现以下情况，必须立即终止生成正文：
+- 页面打不开；
+- 需要登录、付费或权限验证；
+- 页面内容为空；
+- 只显示标题但无法读取正文；
+- 页面加载失败；
+- 内容与宏观经济、金融环境或政策分析明显无关；
+- 无法确认该 URL 的正文内容。
+
+此时不得跳过该 URL 继续写作，也不得基于其他可访问 URL 勉强生成报告。
+
+你必须直接输出以下提示：
+
+“以下 URL 无法正常读取，请更换后重新提交：
+[列出无法访问或无法读取正文的 URL]”
+
+除此之外，不要输出任何正文内容、分析内容或替代版本。
+
+## 咨询公司名称避让法则
+全文不得出现任何咨询公司、审计咨询机构、战略咨询机构或专业服务机构的公司名称、英文名、简称、品牌名或可识别代称。
+不得写“某咨询公司认为”“国际咨询机构指出”“头部咨询机构认为”等措辞；即使 URL 原文中出现相关机构名称，也不得在正文中引用或复述其名称，只能提炼事实、数据和趋势判断。
+
+# 核心撰写法则
+
+## 1. 动态辩证框架法则
+严禁强行套用任何预设年份、预设政策或通用模板。所有时代背景、挑战与动能，必须从上述 URL 正文内容中动态提取。
+
+你必须对资料内容进行二元辩证分类，构建两大一级标题，标题需根据资料自行拟定并高度提炼：
+
+一、[高度概括资料中的核心挑战、阻力或短期风险]
+二、[高度概括资料中的战略机遇、政策红利或长期动能]
+
+两个一级标题必须体现“压力与动能并存”“短期承压与长期转型并行”的宏观战略判断，但不能空泛，必须来自资料内容。
+
+## 2. 句式与排版法则
+必须严格使用 Markdown 层级标题：
+
+一、
+（一）
+1.
+
+在每一个段落内部，必须使用“一是……；二是……；三是……”的强结构排比句式进行事实归纳。
+
+每个“一是”“二是”“三是”后面的核心观点必须加粗，且观点必须能够从 URL 正文资料中找到依据。
+
+示例句式：
+一是**有效需求仍处于修复阶段**，……；二是**价格水平和企业盈利仍面临阶段性压力**，……；三是**外部环境不确定性仍对预期形成扰动**，……。
+
+## 3. 专业术语动态提炼法则
+保持宏观经济与金融政策的高级研报语境，语言应克制、客观、权威、凝练。
+
+优先从 URL 正文中提炼并使用最新出现的专有名词、政策表述、核心数据和趋势判断，例如但不限于：
+- 有效需求不足；
+- 供需错配；
+- 内生动力修复；
+- 财政货币政策协同发力；
+- 逆周期调节；
+- 跨周期调节；
+- 新质生产力；
+- 科技金融；
+- 绿色金融；
+- 普惠金融；
+- 养老金融；
+- 数字金融；
+- 利率中枢下行；
+- 净息差收窄；
+- 房地产风险化解；
+- 地方债务风险防控；
+- 资本市场功能提升。
+
+注意：以上只是术语示例，最终正文中使用的术语必须以 URL 正文内容为准，不能机械套用。
+
+## 4. 事实约束法则
+不得编造 URL 中没有的信息。
+不得虚构数据、政策名称、会议表述、机构判断或时间节点。
+不得使用“据相关资料显示”“有观点认为”等模糊表述替代真实资料依据。
+不得加入与 URL 内容无关的泛泛宏观判断。
+
+如果某一判断缺乏 URL 正文支撑，必须删除，不得猜测。
+
+## 5. 行业落脚点法则
+在每一大部分的末尾，必须基于提炼出的宏观趋势，进行一次“业务推演”，指出这些宏观环境变化将对【${targetEntity}】所在的金融/银行业态产生怎样的具体影响。
+
+业务推演必须具体落到以下方向中的若干项：
+- 资产负债结构调整；
+- 信贷投放结构优化；
+- 净息差与盈利模式变化；
+- 科技金融、绿色金融、普惠金融、养老金融、数字金融等重点领域机会；
+- 房地产、地方债务、中小企业、居民消费等领域风险防控；
+- 客户经营、财富管理、交易银行、投行业务等轻资本转型方向；
+- 风险联防联控和资产质量管理压力。
+
+不得只写“带来机遇与挑战”这类空泛表述。
+
+# 输出要求
+1. 字数控制在 1000-1500 字左右。
+2. 直接输出正文，不要有寒暄、开场白或解释性文字。
+3. 不要输出“我已阅读 URL”“以下是分析”等过程性表述。
+4. 如果所有 URL 均可访问，则直接输出正式正文。
+5. 如果任意 URL 无法访问或无法读取正文，则必须终止生成，并只输出：
+
+“以下 URL 无法正常读取，请更换后重新提交：
+[列出无法访问或无法读取正文的 URL]”`;
+      }
+
+      if (type === "industry") {
+        return `行业分析AI提示词：
+
+# 角色设定
+你是资深银行业务与战略分析专家。你深谙中国金融业的竞争格局、盈利模式演变及监管导向，擅长为具体金融机构量身定制“五年发展战略规划”。
+
+# 分析目标
+【${targetEntity}】：请根据输入资料，撰写该主体战略规划中的《第二节：洞察行业发展变局，识别机遇挑战态势》篇章。
+
+# 研究时间
+${researchYear}
+
+# 输入资料 URL
+请逐条打开并阅读以下 URL 的完整正文内容，提取其中与银行业趋势、息差、资产质量、零售转型、财富管理、数字化转型、风险管理相关的信息。
+
+<行业资料URL>
+${urls}
+</行业资料URL>
+
+# URL 读取与校验规则
+
+## 1. 必须逐条打开 URL
+你必须按顺序逐条打开上述 URL，并完整阅读网页正文内容。严禁只依据网页标题、搜索结果摘要、网页片段、目录、AI 自动摘要或未打开页面的外部信息进行写作。
+
+## 2. 必须完成全文通读后再写作
+只有在确认所有 URL 均可访问，并且已经阅读完整正文后，才可以进入分析和正文撰写阶段。你需要基于 URL 正文中的真实内容进行归纳，不得脱离资料自行补充未经资料支持的信息。
+
+## 3. 任意 URL 无法访问时必须终止
+如果上述 URL 中有任意一条出现以下情况，必须立即终止生成正文：
+- 页面打不开；
+- 需要登录、付费或权限验证；
+- 页面内容为空；
+- 只显示标题但无法读取正文；
+- 页面加载失败；
+- 内容与银行业趋势、金融行业发展或商业银行经营明显无关；
+- 无法确认该 URL 的正文内容。
+
+此时不得跳过该 URL 继续写作，也不得基于其他可访问 URL 勉强生成报告。
+
+你必须直接输出以下提示：
+
+“以下 URL 无法正常读取，请更换后重新提交：
+[列出无法访问或无法读取正文的 URL]”
+
+除此之外，不要输出任何正文内容、分析内容或替代版本。
+
+## 咨询公司名称避让法则
+全文不得出现任何咨询公司、审计咨询机构、战略咨询机构或专业服务机构的公司名称、英文名、简称、品牌名或可识别代称。
+不得写“某咨询公司认为”“国际咨询机构指出”“头部咨询机构认为”等措辞；即使 URL 原文中出现相关机构名称，也不得在正文中引用或复述其名称，只能提炼事实、数据和趋势判断。
+
+# 核心撰写法则
+
+## 1. “破与立”的动态辩证框架
+严禁生搬硬套预设的行业结论。你必须对 URL 正文资料进行深度阅读，并将其重组为两大板块，标题需自行高度提炼：
+- 一、挑战：[高度概括资料中的行业痛点、竞争加剧、盈利承压等变局]
+- 二、机遇：[高度概括资料中的战略赛道、业务转型方向、新增长极等机遇]
+
+## 2. 银行业专业语境
+在行文中，必须保持较高的专业密度，遇到相关资料时，请自然转化为以下银行业专业表达：
+- 痛点词：息差收窄、大行下沉、存量博弈、资本约束、盈利动能弱化。
+- 破局词：轻资本转型、内涵式增长、差异化/特色化壁垒、场景生态深度嵌入、数智化赋能、综合金融服务。
+
+注意：以上只是术语示例，最终正文中使用的术语必须以 URL 正文内容为准，不能机械套用。
+
+## 3. 句式与排版法则
+- 必须严格使用 Markdown 层级标题：一、 -> （一） -> 1.
+- 在每一个段落内部，必须使用“一是...；二是...；三是...”的强结构排比句式进行事实归纳与逻辑演绎。
+- 每一个“一是”“二是”“三是”的开头必须是一句加粗的核心观点，且观点必须能够从 URL 正文资料中找到依据。
+
+## 4. “本行破局”对策法则
+你是在为【${targetEntity}】写规划，不能只谈行业不谈自己。
+在每一个二级标题的末尾，必须增加一段对策性论述，以“【${targetEntity}】需/应紧扣/聚焦...”开头，基于前面的行业分析，为该主体提出具体的破局方向或业务布局建议。
+
+## 5. 事实约束法则
+不得编造 URL 中没有的信息。
+不得虚构数据、政策名称、机构判断或时间节点。
+不得使用“据相关资料显示”“有观点认为”等模糊表述替代真实资料依据。
+如果某一判断缺乏 URL 正文支撑，必须删除，不得猜测。
+
+## 6. 战略收拢与表格输出
+在全篇最后，必须生成一段过渡语，并输出一个 Markdown 格式的总结表格。
+表格表头必须为：
+| 核心赛道/变局 | 行业发展态势 | 本行面临机遇/挑战 | 重点布局方向 |
+
+# 输出要求
+1. 字数要求在 1500 字左右，逻辑严密，具备金融战略规划的专业感。
+2. 直接输出正文及表格，不要有任何寒暄、开场白。
+3. 不要输出“我已阅读 URL”“以下是分析”等过程性表述。
+4. 如果所有 URL 均可访问，则直接输出正式正文。
+5. 如果任意 URL 无法访问或无法读取正文，则必须终止生成，并只输出：
+
+“以下 URL 无法正常读取，请更换后重新提交：
+[列出无法访问或无法读取正文的 URL]”`;
+      }
+
+      if (type === "regional") {
+        return `区域分析AI提示词：
+
+# 角色设定
+你是资深区域经济与金融战略规划专家。你深谙中国各省市的区域经济格局、地方产业政策以及城商行/农商行的本土化深耕逻辑，擅长撰写金融机构的“五年发展战略规划”。
+
+# 分析目标
+【${targetEntity}】：请根据输入资料，撰写该主体战略规划中的《第三节：聚焦区域战略方向，深化省市规划衔接》篇章。
+
+# 研究时间
+${researchYear}
+
+# 银行所在地区
+${bankRegion}
+
+# 输入资料 URL
+请逐条打开并阅读以下 URL 的完整正文内容，提取其中与【${targetEntity}】所在地区【${bankRegion}】的经济规划、产业结构、重点项目、区域战略、政府工作报告、地方发展规划相关的信息。
+
+<区域资料URL>
+${urls}
+</区域资料URL>
+
+# URL 读取与校验规则
+
+## 1. 必须逐条打开 URL
+你必须按顺序逐条打开上述 URL，并完整阅读网页正文内容。严禁只依据网页标题、搜索结果摘要、网页片段、目录、AI 自动摘要或未打开页面的外部信息进行写作。
+
+## 2. 必须完成全文通读后再写作
+只有在确认所有 URL 均可访问，并且已经阅读完整正文后，才可以进入分析和正文撰写阶段。你需要基于 URL 正文中的真实内容进行归纳，不得脱离资料自行补充未经资料支持的信息。
+
+## 3. 任意 URL 无法访问时必须终止
+如果上述 URL 中有任意一条出现以下情况，必须立即终止生成正文：
+- 页面打不开；
+- 需要登录、付费或权限验证；
+- 页面内容为空；
+- 只显示标题但无法读取正文；
+- 页面加载失败；
+- 内容与区域经济、地方规划、产业发展或政府政策明显无关；
+- 无法确认该 URL 的正文内容。
+
+此时不得跳过该 URL 继续写作，也不得基于其他可访问 URL 勉强生成报告。
+
+你必须直接输出以下提示：
+
+“以下 URL 无法正常读取，请更换后重新提交：
+[列出无法访问或无法读取正文的 URL]”
+
+除此之外，不要输出任何正文内容、分析内容或替代版本。
+
+## 咨询公司名称避让法则
+全文不得出现任何咨询公司、审计咨询机构、战略咨询机构或专业服务机构的公司名称、英文名、简称、品牌名或可识别代称。
+不得写“某咨询公司认为”“国际咨询机构指出”“头部咨询机构认为”等措辞；即使 URL 原文中出现相关机构名称，也不得在正文中引用或复述其名称，只能提炼事实、数据和趋势判断。
+
+# 核心撰写法则
+
+## 1. 动态主题提炼法则
+仔细阅读 URL 正文资料，从中提炼出【${targetEntity}】所在地区【${bankRegion}】的核心发展维度，并据此拟定 4-5 个一级标题。若资料内容与【${bankRegion}】明显无关，必须视为资料不符合要求并终止生成。
+标题方向建议，需根据真实素材调整命名：
+- 一、[关于产业集群/实体经济的根基加固]
+- 二、[关于重大项目/政务金融的投资支撑]
+- 三、[关于区域协调/城市能级提升的战略引领]
+- 四、[关于民生消费/城市更新的市场扩容]
+
+## 2. “省-市-行”三步推演法则
+在每一个一级或二级标题的正文段落中，必须按照以下“三步走”的逻辑漏斗进行论述：
+- 第一步，省级定调：首先概括该主体所在省份在这一领域的核心战略或宏观行动，必须从资料中提取特定的政策专有名词或行动代号。
+- 第二步，市级承接：紧接着论述该主体总部所在城市如何紧扣省级导向，落实具体产业或民生目标。
+- 第三步，本行落脚：最后，必须以“【${targetEntity}】可/需着力...”或“为本行...带来机遇”为句式，指出上述省市发展态势，将为该银行的对公信贷、普惠金融、供应链金融、政务金融或财富管理等具体业务板块提供怎样的市场空间和发力点。
+
+## 3. 地方“政策代码”捕获法则
+你必须扫描 URL 正文资料。一旦发现资料中带有数字代号的行动计划、特定的区域定位或百亿/千亿级特定产业集群名称，必须原封不动地将这些“政策表述”嵌入到正文中，以凸显地方特色与专业度。
+
+## 4. 句式与排版法则
+- 必须严格使用 Markdown 层级标题：一、 -> （一） -> 1.
+- 段落内部尽量使用“一是...；二是...；三是...”的强结构句式进行归纳。
+- 段落结构需严谨清晰，语言风格要求为体制内公文的沉稳厚重 + 金融战略规划的敏锐判断。
+
+## 5. 事实约束法则
+不得编造 URL 中没有的信息。
+不得虚构数据、政策名称、机构判断或时间节点。
+不得使用“据相关资料显示”“有观点认为”等模糊表述替代真实资料依据。
+如果某一判断缺乏 URL 正文支撑，必须删除，不得猜测。
+
+# 输出要求
+1. 字数要求在 1200-1500 字左右。
+2. 第一段必须是全局性的总起段，点明该主体所处的“省级战略引领+市域使命担当”的双重叠加格局。
+3. 直接输出正文，不要有任何寒暄、开场白或解释性文字。
+4. 不要输出“我已阅读 URL”“以下是分析”等过程性表述。
+5. 如果所有 URL 均可访问，则直接输出正式正文。
+6. 如果任意 URL 无法访问或无法读取正文，则必须终止生成，并只输出：
+
+“以下 URL 无法正常读取，请更换后重新提交：
+[列出无法访问或无法读取正文的 URL]”`;
+      }
+
+      if (type === "regulatory") {
+        return `合规监管AI提示词：
+
+# 角色设定
+你是国内顶尖的金融监管与合规战略专家。你深谙央行、国家金融监督管理总局等监管机构的政策导向与监管红线，擅长将宏观监管政策转化为商业银行的“五年发展战略规划与合规指引”。
+
+# 分析目标
+【${targetEntity}】：请根据输入资料，撰写该主体战略规划中的《第四节：紧跟政策监管导向，校准发展边界重点》篇章。
+
+# 研究时间
+${researchYear}
+
+# 银行所在地区
+${bankRegion}
+
+# 输入资料 URL
+请逐条打开并阅读以下 URL 的完整正文内容，提取其中与【${targetEntity}】所在地区【${bankRegion}】相关的金融监管、资本约束、风险防控、普惠金融、绿色金融、科技金融、国家金融监督管理总局、中国人民银行、商业银行监管政策信息。
+
+<监管资料URL>
+${urls}
+</监管资料URL>
+
+# URL 读取与校验规则
+
+## 1. 必须逐条打开 URL
+你必须按顺序逐条打开上述 URL，并完整阅读网页正文内容。严禁只依据网页标题、搜索结果摘要、网页片段、目录、AI 自动摘要或未打开页面的外部信息进行写作。
+
+## 2. 必须完成全文通读后再写作
+只有在确认所有 URL 均可访问，并且已经阅读完整正文后，才可以进入分析和正文撰写阶段。你需要基于 URL 正文中的真实内容进行归纳，不得脱离资料自行补充未经资料支持的信息。
+
+## 3. 任意 URL 无法访问时必须终止
+如果上述 URL 中有任意一条出现以下情况，必须立即终止生成正文：
+- 页面打不开；
+- 需要登录、付费或权限验证；
+- 页面内容为空；
+- 只显示标题但无法读取正文；
+- 页面加载失败；
+- 内容与金融监管、银行监管、风险防控或商业银行合规明显无关；
+- 无法确认该 URL 的正文内容。
+
+此时不得跳过该 URL 继续写作，也不得基于其他可访问 URL 勉强生成报告。
+
+你必须直接输出以下提示：
+
+“以下 URL 无法正常读取，请更换后重新提交：
+[列出无法访问或无法读取正文的 URL]”
+
+除此之外，不要输出任何正文内容、分析内容或替代版本。
+
+## 咨询公司名称避让法则
+全文不得出现任何咨询公司、审计咨询机构、战略咨询机构或专业服务机构的公司名称、英文名、简称、品牌名或可识别代称。
+不得写“某咨询公司认为”“国际咨询机构指出”“头部咨询机构认为”等措辞；即使 URL 原文中出现相关机构名称，也不得在正文中引用或复述其名称，只能提炼事实、数据和趋势判断。
+
+# 核心撰写法则
+
+## 1. 监管维度的“红绿灯”重构法则
+严禁按流水账罗列政策文件。仔细扫描 URL 正文资料，将杂乱的监管要求高度归纳为 3-4 个核心战略维度。
+强烈建议，需根据实际素材调整：
+- 一、[关于业务发展/五篇大文章等政策鼓励方向]（绿灯）
+- 二、[关于风险防控/底线思维/合规经营的刚性约束]（红灯）
+- 三、[关于公司治理/金融科技/数据安全的基础设施要求]（支撑）
+
+## 2. “监管指令 + 战略回应”的闭环法则
+在每一个一级标题下的正文段落中，必须结合【${targetEntity}】所在地区【${bankRegion}】的银行业经营环境进行论述，并按照以下两步逻辑展开：
+- 第一步，提炼监管指令：必须使用“一是...；二是...；三是...”的排比句式，归纳资料中的具体监管要求。句式多用“监管部门持续引导/着力强化/密集出台...”。
+- 第二步，本行战略回应：在排比句结束后，必须以“【${targetEntity}】需/应紧扣/紧跟...”为段落结尾。结合前面的监管指令，明确指出该主体在具体的信贷投放、风险处置、合规体系建设或科技应用上应该采取的对策。
+
+## 3. 监管术语词库
+在行文中，必须保持严肃、权威的合规语境。遇到相关资料时，请自然转化为以下标准监管术语：
+- 导向类：高质量发展主线、五篇大文章、精准对接、服务实体经济。
+- 约束类：底线思维、穿透式监管、全覆盖监管、压实主体责任、刚性约束、央地监管协同、防范化解常态化。
+
+注意：以上只是术语示例，最终正文中使用的术语必须以 URL 正文内容为准，不能机械套用。
+
+## 4. 句式与排版法则
+- 必须严格使用 Markdown 层级标题：一、 -> （一） -> 1.
+- 第一段必须是全局性的总起段，定调当前监管整体态势，以及对银行业的整体意义。
+
+## 5. 事实约束法则
+不得编造 URL 中没有的信息。
+不得虚构数据、政策名称、监管表述、机构判断或时间节点。
+不得使用“据相关资料显示”“有观点认为”等模糊表述替代真实资料依据。
+如果某一判断缺乏 URL 正文支撑，必须删除，不得猜测。
+
+# 输出要求
+1. 字数要求在 1000-1200 字左右。
+2. 所有提炼的监管要求必须来源于 URL 正文资料，严禁凭空捏造未颁布的政策。
+3. 直接输出正文，不要有任何寒暄、开场白或解释性文字。
+4. 不要输出“我已阅读 URL”“以下是分析”等过程性表述。
+5. 如果所有 URL 均可访问，则直接输出正式正文。
+6. 如果任意 URL 无法访问或无法读取正文，则必须终止生成，并只输出：
+
+“以下 URL 无法正常读取，请更换后重新提交：
+[列出无法访问或无法读取正文的 URL]”`;
+      }
+
+      return "";
+    }
+
+    function copyFinalPrompt() {
+      const baseInfo = getBaseInfo();
+      if (!baseInfo) return;
+
+      const macroDraft = getDraft("macro");
+      const industryDraft = getDraft("industry");
+      const regionalDraft = getDraft("regional");
+      const regulatoryDraft = getDraft("regulatory");
+
+      const missing = [];
+
+      if (!macroDraft) missing.push("宏观篇");
+      if (!industryDraft) missing.push("行业篇");
+      if (!regionalDraft) missing.push("区域篇");
+      if (!regulatoryDraft) missing.push("监管篇");
+
+      if (missing.length > 0) {
+        alert(`以下内容还没有粘贴：${missing.join("、")}。请先补齐后再生成最终稿。`);
+        return;
+      }
+
+      const prompt = `最终润色与融合提示词：
+
+# 角色设定
+你是资深金融战略规划项目总监及首席主笔。你擅长将碎片化的专业报告，缝合、提炼并升华为一份具有极高商业视野、逻辑严密、排版精美的《中长期发展战略规划》定稿，直接面向企业董事会与高管层汇报。
+
+# 当前战略主体
+【${baseInfo.targetEntity}】
+
+# 银行所在地区
+${baseInfo.bankRegion}
+
+# 研究时间
+${baseInfo.researchYear}
+
+# 输入信息
+以下是四个维度已经生成的初稿。请基于四篇内容进行融合、润色、统一逻辑和语言风格，生成最终完整稿。
+
+<宏观篇>
+${macroDraft}
+</宏观篇>
+
+<行业篇>
+${industryDraft}
+</行业篇>
+
+<区域篇>
+${regionalDraft}
+</区域篇>
+
+<监管篇>
+${regulatoryDraft}
+</监管篇>
+
+# 咨询公司名称避让法则
+最终稿全文不得出现任何咨询公司、审计咨询机构、战略咨询机构或专业服务机构的公司名称、英文名、简称、品牌名或可识别代称。
+不得写“某咨询公司认为”“国际咨询机构指出”“头部咨询机构认为”等措辞；如四篇初稿中已经出现相关名称，必须在最终稿中删除或改写为中性表达。
+
+# 首席主笔融合法则
+
+## 1. 绝对保真与全量融合法则
+你的核心工作是“组装、润色与拔高”，绝对不允许随意删减四个维度中的核心论点、数据支撑、排比句式以及业务推演。你必须尽可能保留输入素材中的干货。
+
+## 2. 篇章架构重塑法则
+你必须为全篇构建统一的 Markdown 结构大纲，统一标题层级，使全文浑然一体。
+强制要求全文遵循以下结构进行排版：
+
+【开篇：摘要】
+请根据四篇输入文稿，提炼一段约 300-400 字的高密度摘要，高度概括【${baseInfo.targetEntity}】在【${baseInfo.bankRegion}】所处的外部环境全貌及核心破局点。
+
+【第一章：宏观形势】
+在此处无缝接入并润色 <宏观篇> 内容，需增加过渡句引出下文。
+
+【第二章：行业发展】
+在此处无缝接入并润色 <行业篇> 内容，保留原始表格，需增加过渡句。
+
+【第三章：区域方向】
+在此处无缝接入并润色 <区域篇> 内容，需增加过渡句。
+
+【第四章：监管导向】
+在此处无缝接入并润色 <监管篇> 内容，需增加过渡句。
+
+【结语：战略启示】
+这是你需要原创升华的部分。请综合宏观、行业、区域、监管四大维度的分析，为【${baseInfo.targetEntity}】提炼 3-4 条高度凝练的“核心战略启示”。必须结合其所在地区【${baseInfo.bankRegion}】的区域定位与监管环境，站在全行一盘棋的高度，给出业务结构转型或核心能力建设的破局建议。
+
+## 3. 金融战略规划语境与排版法则
+- 消除缝隙：在不同章节的交界处，必须加入自然的过渡段落，消除四篇文章拼接的割裂感。
+- 视觉焦点：全篇所有的核心结论、关键动作必须进行加粗处理，以便高管快速抓取重点。
+- 语调统一：确保全文保持客观、冷静、克制、数据驱动的金融战略规划语调。
+
+# 输出要求
+1. 直接输出排版精美的完整长文报告，这将作为最终交付物。
+2. 不要输出任何“好的”、“没问题”、“以下是报告”等废话。
+3. 不要编造输入材料之外的新事实、新数据或新政策。
+4. 如发现四篇初稿之间存在明显重复，请合并同类项，但不要删除关键判断。`;
+
+      navigator.clipboard.writeText(prompt).then(() => {
+        showMessage("finalMessage");
+      }).catch(() => {
+        fallbackCopy(prompt);
+        showMessage("finalMessage");
+      });
+    }
+  </script>
+</body>
+</html>
